@@ -43,3 +43,39 @@ TEST_CASE("019 copy_n")
         CHECK(std::equal(begin(dest), end(dest), begin(result), end(result)));
     }
 }
+
+TEST_CASE("020 copy_backward")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5};
+    auto dest = std::vector<int>(arr.size());
+
+    SECTION("stl")
+    {
+        std::copy_backward(begin(arr), end(arr), end(dest));
+        CHECK(std::equal(begin(arr), end(arr), begin(dest), end(dest)));
+    }
+}
+
+TEST_CASE("021 move")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5};
+    auto dest = std::vector<int>{};
+
+    SECTION("stl")
+    {
+        std::move(begin(arr), end(arr), std::back_inserter(dest));
+        CHECK(std::equal(begin(arr), end(arr), begin(dest), end(dest)));
+    }
+}
+
+TEST_CASE("022 move_backward")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5};
+    auto dest = std::vector<int>(arr.size());
+
+    SECTION("stl")
+    {
+        std::move_backward(begin(arr), end(arr), end(dest));
+        CHECK(std::equal(begin(arr), end(arr), begin(dest), end(dest)));
+    }
+}
