@@ -71,12 +71,6 @@ int main()
         print("partition_point get it: " + std::to_string(m == n));
     }
 
-    // permutation
-    rotate(d.begin(), d.begin() + 1, d.end());
-    print("rotate 1st to left");
-    rotate(d.rbegin(), d.rbegin() + 1, d.rend());
-    print("rotate it back");
-
     {
         d = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         print("new sorted std::vector");
@@ -210,7 +204,7 @@ int main()
     }
 
     {
-        print_func( "unique_copy", "rotate_copy", "partition_copy", "partial_sort_copy");
+        print_func( "unique_copy", "partition_copy", "partial_sort_copy");
     }
 
     iota(d.begin(), d.end(), 42);
