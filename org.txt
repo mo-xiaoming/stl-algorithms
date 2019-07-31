@@ -213,22 +213,12 @@ int main()
     }
 
     {
-        print_func( "remove_copy", "unique_copy", "reverse_copy",
-                   "rotate_copy", "replace_copy", "partition_copy", "partial_sort_copy");
-    }
-
-    {
-        d = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        auto v = std::vector(d.rbegin(), d.rend());
-        swap_ranges(d.begin(), d.end(), v.begin());
-        print("swap_ranges");
+        print_func( "unique_copy", "reverse_copy",
+                   "rotate_copy", "partition_copy", "partial_sort_copy");
     }
 
     iota(d.begin(), d.end(), 42);
     print("iota from 42");
-
-    replace(d.begin(), d.end(), 42, 43);
-    print("replace 42 with 43");
 
     {
         d = {1, 2, 3, 3, 3, 4, 3, 5, 6};
@@ -236,6 +226,4 @@ int main()
         print("unique elems ends @" + std::to_string(distance(d.begin(), j)));
     }
 
-    print_func( "remove_copy_if", "replace_if",
-               "replace_copy_if");
 }

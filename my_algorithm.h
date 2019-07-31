@@ -4,7 +4,7 @@
 #include <utility>
 
 template<typename I>
-inline bool is_even(I i)
+inline bool is_even(I i) noexcept
 {
     return i % 2 == 0;
 }
@@ -14,7 +14,7 @@ inline bool icase_compare(char i, char j)
     return std::toupper(i) == std::toupper(j);
 }
 
-inline void inc_self(int &t)
+inline constexpr void inc_self(int &t) noexcept
 {
     ++t;
 }
