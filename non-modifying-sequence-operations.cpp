@@ -5,90 +5,6 @@
 
 #include "my_stl.h"
 
-template<typename It, typename V>
-constexpr auto my_count(It begin, It end, const V &v)
-{
-    auto ret = 0;
-    for (; begin != end; ++begin) {
-        if (*begin == v)
-            ++ret;
-    }
-    return ret;
-}
-
-template<typename It, typename Pre>
-constexpr auto my_count_if(It begin, It end, Pre p)
-{
-    auto ret = 0;
-    for (; begin != end; ++begin) {
-        if (p(*begin))
-            ++ret;
-    }
-    return ret;
-}
-
-template<typename It, typename F>
-constexpr bool my_all_of(It begin, It end, F f)
-{
-    for (; begin != end; ++begin) {
-        if (!f(*begin))
-            return false;
-    }
-    return true;
-}
-
-template<typename It, typename F>
-constexpr bool my_any_of(It begin, It end, F f)
-{
-    for (; begin != end; ++begin) {
-        if (f(*begin))
-            return true;
-    }
-    return false;
-}
-
-template<typename It, typename F>
-constexpr bool my_none_of(It begin, It end, F f)
-{
-    for (; begin != end; ++begin) {
-        if (f(*begin))
-            return false;
-    }
-    return true;
-}
-
-template<typename It, typename F>
-constexpr void my_for_each(It begin, It end, F f)
-{
-    for (; begin != end; ++begin) {
-        f(*begin);
-    }
-}
-
-template<typename It, typename S, typename F>
-constexpr void my_for_each_n(It begin, S s, F f)
-{
-    for (; s > 0; --s, ++begin) {
-        f(*begin);
-    }
-}
-
-template<typename It1, typename It2>
-constexpr auto my_mismatch(It1 begin1, It1 end1, It2 begin2)
-{
-    for (; *begin1 == *begin2 && begin1 != end1; ++begin1, ++begin2)
-        ;
-    return std::make_pair(begin1, begin2);
-}
-
-template<typename It1, typename It2, typename F>
-constexpr auto my_mismatch(It1 begin1, It1 end1, It2 begin2, F f)
-{
-    for (; f(*begin1, *begin2) && begin1 != end1; ++begin1, ++begin2)
-        ;
-    return std::make_pair(begin1, begin2);
-}
-
 constexpr auto Empty_Array = std::array<int, 0>{};
 
 TEST_CASE("001 count")
@@ -282,5 +198,61 @@ TEST_CASE("008 mismatch with func")
         auto [i, j] = my_mismatch(begin(s1), end(s1), begin(s2), icase_compare);
         CHECK(std::distance(s1.begin(), i) == std::distance(s2.begin(), j));
         CHECK(*i == 'o');
+    }
+}
+
+TEST_CASE("009 find")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5};
+
+    SECTION("stl")
+    {
+        CHECK(std::find(begin(arr), end(arr), 3) == (begin(arr) + 3));
+        CHECK(std::find(begin(arr), end(arr), 7) == end(arr));
+    }
+
+    SECTION("my")
+    {
+        CHECK(my_find(begin(arr), end(arr), 3) == (begin(arr) + 3));
+        CHECK(my_find(begin(arr), end(arr), 7) == end(arr));
+    }
+}
+
+TEST_CASE("010 find_if")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5};
+
+    SECTION("stl")
+    {
+        CHECK(std::find_if(begin(arr), end(arr), [](auto i) { return i + 1 >= 4; })
+              == (begin(arr) + 3));
+        CHECK(std::find_if(begin(arr), end(arr), [](auto i) { return i + 1 >= 10; }) == end(arr));
+    }
+
+    SECTION("my")
+    {
+        CHECK(my_find_if(begin(arr), end(arr), [](auto i) { return i + 1 >= 4; })
+              == (begin(arr) + 3));
+        CHECK(my_find_if(begin(arr), end(arr), [](auto i) { return i + 1 >= 10; }) == end(arr));
+    }
+}
+
+TEST_CASE("011 find_if_no")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5};
+
+    SECTION("stl")
+    {
+        CHECK(std::find_if_not(begin(arr), end(arr), [](auto i) { return i + 1 < 4; })
+              == (begin(arr) + 3));
+        CHECK(std::find_if_not(begin(arr), end(arr), [](auto i) { return i + 1 < 10; })
+              == end(arr));
+    }
+
+    SECTION("my")
+    {
+        CHECK(my_find_if_not(begin(arr), end(arr), [](auto i) { return i + 1 < 4; })
+              == (begin(arr) + 3));
+        CHECK(my_find_if_not(begin(arr), end(arr), [](auto i) { return i + 1 < 10; }) == end(arr));
     }
 }
