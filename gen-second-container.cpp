@@ -6,7 +6,33 @@
 
 #include "my_algorithm.h"
 
-TEST_CASE("029 remove_cpy")
+TEST_CASE("033 replace_copy")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5};
+    constexpr auto result = std::array{0, 1, 7, 3, 4, 5};
+
+    SECTION("stl")
+    {
+        auto dest = std::vector<int>{};
+        std::replace_copy(begin(arr), end(arr), std::back_inserter(dest), 2, 7);
+        CHECK(std::equal(begin(dest), end(dest), begin(result), end(result)));
+    }
+}
+
+TEST_CASE("034 replace_copy_if")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5};
+    constexpr auto result = std::array{7, 1, 7, 3, 7, 5};
+
+    SECTION("stl")
+    {
+        auto dest = std::vector<int>{};
+        std::replace_copy_if(begin(arr), end(arr), std::back_inserter(dest), is_even<int>, 7);
+        CHECK(std::equal(begin(dest), end(dest), begin(result), end(result)));
+    }
+}
+
+TEST_CASE("029 remove_copy")
 {
     constexpr auto arr = std::array{0, 1, 2, 3, 4, 5};
     constexpr auto result = std::array{0, 1, 3, 4, 5};

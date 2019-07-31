@@ -30,3 +30,27 @@ TEST_CASE("028 remove_if")
         CHECK(std::equal(begin(v), end(v), begin(result), end(result)));
     }
 }
+
+TEST_CASE("031 replace")
+{
+    auto v = std::vector<int>{1, 2, 3, 4, 5};
+    constexpr auto result = std::array{1, 7, 3, 4, 5};
+
+    SECTION("stl")
+    {
+        std::replace(begin(v), end(v), 2, 7), end(v);
+        CHECK(std::equal(begin(v), end(v), begin(result), end(result)));
+    }
+}
+
+TEST_CASE("032 replace_if")
+{
+    auto v = std::vector<int>{1, 2, 3, 4, 5};
+    constexpr auto result = std::array{1, 7, 3, 7, 5};
+
+    SECTION("stl")
+    {
+        std::replace_if(begin(v), end(v), is_even<int>, 7);
+        CHECK(std::equal(begin(v), end(v), begin(result), end(result)));
+    }
+}
