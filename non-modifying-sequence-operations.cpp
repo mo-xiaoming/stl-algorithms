@@ -282,3 +282,27 @@ TEST_CASE("012 find_end with func")
         CHECK(std::find_end(begin(s), end(s), begin(p2), end(p2), icase_compare) == (end(s) - 4));
     }
 }
+
+TEST_CASE("013 find_first_of")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5, 6};
+    constexpr auto pat = std::array{5, 4, 2};
+
+    SECTION("stl")
+    {
+        CHECK(std::find_first_of(begin(arr), end(arr), begin(pat), end(pat)) == (begin(arr) + 2));
+    }
+}
+
+TEST_CASE("013 find_first_of with func")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5, 6};
+    constexpr auto pat = std::array{5, 4, 2};
+
+    SECTION("stl")
+    {
+        CHECK(std::find_first_of(begin(arr), end(arr), begin(pat), end(pat),
+                                 [](auto i, auto j) { return i + 1 == j; })
+              == (begin(arr) + 1));
+    }
+}
