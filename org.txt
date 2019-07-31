@@ -40,23 +40,18 @@ int main()
     nth_element(d.begin(), d.begin() + 2, d.end());
     print("nth_element 2th smallest");
 
-    shuffle(d.begin(), d.end(), std::mt19937(std::random_device()()));
-    print("random_shuffle");
 
     sort(d.begin(), d.begin() + 5);
     sort(d.begin() + 5, d.end());
     inplace_merge(d.begin(), d.begin() + 5, d.end());
     print("inplace_merge");
 
-    shuffle(d.begin(), d.end(), std::mt19937(std::random_device()()));
     boost::sort::spreadsort::spreadsort(begin(d), end(d));
     print("spreadsort");
 
-    shuffle(d.begin(), d.end(), std::mt19937(std::random_device()()));
     boost::algorithm::sort_subrange(d.begin(), d.end(), d.begin() + 2, d.end() - 2);
     print("sort_subrange");
 
-    shuffle(d.begin(), d.end(), std::mt19937(std::random_device()()));
     boost::algorithm::partition_subrange(d.begin(), d.end(), d.begin() + 2, d.end() - 2);
     print("partition_subrange");
 
@@ -85,9 +80,6 @@ int main()
         print("is_permuation to self: "
               + std::to_string(is_permutation(d.begin(), d.end(), d.rbegin())));
     }
-
-    shuffle(d.begin(), d.end(), std::mt19937(std::random_device()()));
-    print("random_shuffle");
 
     stable_sort(d.begin(), d.end());
     print("stable_sort?");
@@ -122,12 +114,6 @@ int main()
 
     adjacent_difference(d.begin(), d.end(), d.begin());
     print("adjacent_difference");
-
-    {
-        auto v = std::vector<int>{};
-        sample(d.begin(), d.end(), back_inserter(v), 5, std::mt19937{std::random_device{}()});
-        print_container(v, "5 sample");
-    }
 
     print("one_of even: " + std::to_string(boost::algorithm::one_of(d.begin(), d.end(), is_even)));
     print_func("all_of_equal", "none_of_equal", "any_of_equal", "one_of_equal");
@@ -204,16 +190,9 @@ int main()
     }
 
     {
-        print_func( "unique_copy", "partition_copy", "partial_sort_copy");
+        print_func( "partition_copy", "partial_sort_copy");
     }
 
     iota(d.begin(), d.end(), 42);
     print("iota from 42");
-
-    {
-        d = {1, 2, 3, 3, 3, 4, 3, 5, 6};
-        auto j = unique(d.begin(), d.end());
-        print("unique elems ends @" + std::to_string(distance(d.begin(), j)));
-    }
-
 }

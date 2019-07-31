@@ -30,3 +30,30 @@ TEST_CASE("040 rotate_copy")
         CHECK(std::equal(begin(dest), end(dest), begin(result), end(result)));
     }
 }
+
+TEST_CASE("041 shuffle")
+{
+    auto v = std::vector{1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7};
+
+    SECTION("stl")
+    {
+        std::shuffle(begin(v), end(v), std::mt19937{std::random_device{}()});
+        SUCCEED();
+    }
+}
+
+TEST_CASE("042 sample")
+{
+    auto v = std::vector{1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7};
+
+    SECTION("stl")
+    {
+        auto dest = std::vector<int>{};
+        std::sample(begin(v), end(v), std::back_inserter(dest), 7,
+                    std::mt19937{std::random_device{}()});
+        CHECK(dest.size() == 7);
+        std::sort(begin(v), end(v));
+        std::sort(begin(dest), end(dest));
+        CHECK(std::includes(begin(v), end(v), begin(dest), end(dest)));
+    }
+}
