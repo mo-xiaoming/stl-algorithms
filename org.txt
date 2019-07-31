@@ -92,9 +92,6 @@ int main()
               + std::to_string(is_permutation(d.begin(), d.end(), d.rbegin())));
     }
 
-    reverse(d.begin(), d.end());
-    print("reverse");
-
     shuffle(d.begin(), d.end(), std::mt19937(std::random_device()()));
     print("random_shuffle");
 
@@ -213,8 +210,7 @@ int main()
     }
 
     {
-        print_func( "unique_copy", "reverse_copy",
-                   "rotate_copy", "partition_copy", "partial_sort_copy");
+        print_func( "unique_copy", "rotate_copy", "partition_copy", "partial_sort_copy");
     }
 
     iota(d.begin(), d.end(), 42);

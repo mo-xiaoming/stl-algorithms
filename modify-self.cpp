@@ -9,7 +9,7 @@
 
 TEST_CASE("027 remove")
 {
-    auto v = std::vector<int>{1, 2, 3, 4, 5};
+    auto v = std::vector{1, 2, 3, 4, 5};
     constexpr auto result = std::array{1, 3, 4, 5};
 
     SECTION("stl")
@@ -21,7 +21,7 @@ TEST_CASE("027 remove")
 
 TEST_CASE("028 remove_if")
 {
-    auto v = std::vector<int>{1, 2, 3, 4, 5};
+    auto v = std::vector{1, 2, 3, 4, 5};
     constexpr auto result = std::array{1, 3, 5};
 
     SECTION("stl")
@@ -33,7 +33,7 @@ TEST_CASE("028 remove_if")
 
 TEST_CASE("031 replace")
 {
-    auto v = std::vector<int>{1, 2, 3, 4, 5};
+    auto v = std::vector{1, 2, 3, 4, 5};
     constexpr auto result = std::array{1, 7, 3, 4, 5};
 
     SECTION("stl")
@@ -45,12 +45,24 @@ TEST_CASE("031 replace")
 
 TEST_CASE("032 replace_if")
 {
-    auto v = std::vector<int>{1, 2, 3, 4, 5};
+    auto v = std::vector{1, 2, 3, 4, 5};
     constexpr auto result = std::array{1, 7, 3, 7, 5};
 
     SECTION("stl")
     {
         std::replace_if(begin(v), end(v), is_even<int>, 7);
+        CHECK(std::equal(begin(v), end(v), begin(result), end(result)));
+    }
+}
+
+TEST_CASE("038 reverse")
+{
+    auto v = std::vector{1, 2, 3, 4};
+    constexpr auto result = std::array{4, 3, 2, 1};
+
+    SECTION("stl")
+    {
+        std::reverse(begin(v), end(v));
         CHECK(std::equal(begin(v), end(v), begin(result), end(result)));
     }
 }
