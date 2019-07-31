@@ -9,9 +9,14 @@ inline bool is_even(I i)
     return i % 2 == 0;
 }
 
-bool icase_compare(char i, char j)
+inline bool icase_compare(char i, char j)
 {
     return std::toupper(i) == std::toupper(j);
+}
+
+inline void inc_self(int &t)
+{
+    ++t;
 }
 
 template<typename It, typename V>

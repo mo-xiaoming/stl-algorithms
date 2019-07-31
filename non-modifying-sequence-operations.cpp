@@ -3,7 +3,7 @@
 
 #include <catch2/catch.hpp>
 
-#include "my_stl.h"
+#include "my_algorithm.h"
 
 constexpr auto Empty_Array = std::array<int, 0>{};
 
@@ -132,13 +132,13 @@ TEST_CASE("006 for_each")
     constexpr auto result = std::array{2, 3, 4, 5, 6, 5, 8};
     SECTION("stl")
     {
-        std::for_each(begin(arr), end(arr), [](auto &i) { ++i; });
+        std::for_each(begin(arr), end(arr), inc_self);
         CHECK(std::equal(begin(arr), end(arr), begin(result)));
     }
 
     SECTION("my")
     {
-        my_for_each(begin(arr), end(arr), [](auto &i) { ++i; });
+        my_for_each(begin(arr), end(arr), inc_self);
         CHECK(std::equal(begin(arr), end(arr), begin(result)));
     }
 }
@@ -150,13 +150,13 @@ TEST_CASE("007 for_each_n")
     SECTION("stl")
     {
         // could not get it build, because boost needs opencl for for_each_n?
-        // boost::compute::for_each_n(begin(arr), 3, [](auto &i) { ++i; });
+        // boost::compute::for_each_n(begin(arr), 3, inc_self);
         // CHECK(std::equal(begin(arr), end(arr), begin(result)));
     }
 
     SECTION("my")
     {
-        my_for_each_n(begin(arr), 3, [](auto &i) { ++i; });
+        my_for_each_n(begin(arr), 3, inc_self);
         CHECK(std::equal(begin(arr), end(arr), begin(result)));
     }
 }
@@ -254,5 +254,31 @@ TEST_CASE("011 find_if_no")
         CHECK(my_find_if_not(begin(arr), end(arr), [](auto i) { return i + 1 < 4; })
               == (begin(arr) + 3));
         CHECK(my_find_if_not(begin(arr), end(arr), [](auto i) { return i + 1 < 10; }) == end(arr));
+    }
+}
+
+TEST_CASE("012 find_end")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 1, 2, 3, 4};
+    constexpr auto pat = std::array{1, 2, 3};
+    constexpr auto pat1 = std::array{4, 5, 6};
+
+    SECTION("stl")
+    {
+        CHECK(std::find_end(begin(arr), end(arr), begin(pat), end(pat)) == (begin(arr) + 5));
+        CHECK(std::find_end(begin(arr), end(arr), begin(pat1), end(pat1)) == end(arr));
+    }
+}
+
+TEST_CASE("012 find_end with func")
+{
+    const auto s = std::string{"abcefghabcd"};
+    const auto p1 = std::string{"abc"};
+    const auto p2 = std::string{"ABC"};
+
+    SECTION("stl")
+    {
+        CHECK(std::find_end(begin(s), end(s), begin(p1), end(p1), icase_compare) == (end(s) - 4));
+        CHECK(std::find_end(begin(s), end(s), begin(p2), end(p2), icase_compare) == (end(s) - 4));
     }
 }
