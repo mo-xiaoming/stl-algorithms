@@ -30,3 +30,16 @@ TEST_CASE("018 copy_if")
         CHECK(std::equal(begin(dest), end(dest), begin(result), end(result)));
     }
 }
+
+TEST_CASE("019 copy_n")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5};
+    auto dest = std::vector<int>{};
+
+    SECTION("stl")
+    {
+        std::copy_n(begin(arr), 3, std::back_inserter(dest));
+        constexpr auto result = std::array{0, 1, 2};
+        CHECK(std::equal(begin(dest), end(dest), begin(result), end(result)));
+    }
+}
