@@ -213,10 +213,7 @@ int main()
     }
 
     {
-        auto v = std::vector<int>{};
-        move(d.begin(), d.end(), back_inserter(v));
-        print("move");
-        print_func("move_backwards", "remove_copy", "unique_copy", "reverse_copy",
+        print_func( "remove_copy", "unique_copy", "reverse_copy",
                    "rotate_copy", "replace_copy", "partition_copy", "partial_sort_copy");
     }
 
