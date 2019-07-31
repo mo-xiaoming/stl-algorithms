@@ -79,3 +79,17 @@ TEST_CASE("022 move_backward")
         CHECK(std::equal(begin(arr), end(arr), begin(dest), end(dest)));
     }
 }
+
+TEST_CASE("023 transform with one input")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5};
+    constexpr auto result = std::array{0, 1, 4, 9, 16, 25};
+
+    SECTION("stl")
+    {
+        auto dest = std::vector<int>{};
+        std::transform(begin(arr), end(arr), std::back_inserter(dest),
+                       [](auto i) { return i * i; });
+        CHECK(std::equal(begin(result), end(result), begin(dest), end(dest)));
+    }
+}

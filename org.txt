@@ -224,8 +224,6 @@ int main()
         print("swap_ranges");
     }
 
-    fill(d.begin(), d.end(), 42);
-    print("fill with 42");
     generate(d.begin(), d.end(), [] { return 3; });
     print("generate with 3");
     iota(d.begin(), d.end(), 42);
@@ -245,15 +243,5 @@ int main()
     print_func("remove_if", "remove_copy_if", "replace_if",
                "replace_copy_if");
 
-    {
-        d = {0, 1, 2, 3, 4, 5, 6};
-        auto v = std::vector<int>{};
-        transform(d.begin(), d.end(), back_inserter(v), [](auto i) { return i * i; });
-        print("transform");
-
-        transform(d.begin(), d.end(), v.begin(), d.begin(), [](auto i, auto j) { return i + j; });
-        print("trasform 2d");
-    }
-
-    print_func( "generate_n", "fill_n");
+    print_func( "generate_n");
 }
