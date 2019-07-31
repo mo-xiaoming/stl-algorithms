@@ -173,15 +173,6 @@ int main()
     print("equal to self: " + std::to_string(equal(d.begin(), d.end(), d.begin())));
     print("lexicographic_compare to self: " + std::to_string(equal(d.begin(), d.end(), d.begin())));
 
-    {
-        auto i = find(d.begin(), d.end(), 3);
-        print("find 3 @" + std::to_string(distance(d.begin(), i)));
-    }
-
-    {
-        auto i = adjacent_find(d.begin(), d.end());
-        print("adjacent_find equal: " + std::to_string(i == d.end()));
-    }
 
     {
         d = {0, 1, 2, 3, 3, 3, 4, 5, 6};
@@ -201,29 +192,12 @@ int main()
 
     {
         auto v = {2, 3, 4};
-        print("search 2,3,4: @"
-              + std::to_string(
-                      distance(d.begin(), search(d.begin(), d.end(), v.begin(), v.end()))));
-        print("find_end 2,3,4: @"
-              + std::to_string(
-                      distance(d.begin(), find_end(d.begin(), d.end(), v.begin(), v.end()))));
-        shuffle(d.begin(), d.end(), std::mt19937(std::random_device()()));
-        print("find_first 2,3,4: @"
-              + std::to_string(
-                      distance(d.begin(), find_first_of(d.begin(), d.end(), v.begin(), v.end()))));
 
         sort(d.begin(), d.end());
         auto [i, j] = boost::algorithm::knuth_morris_pratt_search(d, v);
         print("KMP search @" + std::to_string(distance(d.begin(), i)) + "-@"
               + std::to_string(distance(d.begin(), j)));
 
-        auto [m, n] = boost::algorithm::boyer_moore_search(d, v);
-        print("Boyer-Moore search @" + std::to_string(distance(d.begin(), m)) + "-@"
-              + std::to_string(distance(d.begin(), n)));
-
-        auto [k, p] = boost::algorithm::boyer_moore_horspool_search(d, v);
-        print("Boyer-Moore-Horspool search @" + std::to_string(distance(d.begin(), k)) + "-@"
-              + std::to_string(distance(d.begin(), p)));
 
         auto [q, r] = boost::algorithm::gather(begin(d), end(d), begin(d) + 5, is_even);
         print("gather @" + std::to_string(distance(d.begin(), q)) + "-@"
@@ -298,7 +272,7 @@ int main()
         print("unique elems ends @" + std::to_string(distance(d.begin(), j)));
     }
 
-    print_func("find_if", "find_if_not", "remove_if", "remove_copy_if", "replace_if",
+    print_func("remove_if", "remove_copy_if", "replace_if",
                "replace_copy_if", "copy_if");
 
     {

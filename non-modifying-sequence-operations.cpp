@@ -1,6 +1,6 @@
-#include <iostream>
 #include <algorithm>
 #include <array>
+#include <functional>
 
 #include <catch2/catch.hpp>
 
@@ -323,5 +323,53 @@ TEST_CASE("014 adjacent_find with func")
     {
         CHECK(std::adjacent_find(begin(arr), end(arr), [](auto i, auto j) { return j - i == 2; })
               == (begin(arr) + 4));
+    }
+}
+
+TEST_CASE("015 search")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 1, 2, 3, 4};
+    constexpr auto pat = std::array{1, 2, 3};
+    constexpr auto pat1 = std::array{4, 5, 6};
+
+    SECTION("stl")
+    {
+        CHECK(std::search(begin(arr), end(arr), begin(pat), end(pat)) == (begin(arr) + 1));
+        CHECK(std::search(begin(arr), end(arr), begin(pat1), end(pat1)) == end(arr));
+    }
+}
+
+TEST_CASE("015 search with func")
+{
+    const auto s = std::string{"abcefghabcd"};
+    const auto p1 = std::string{"bce"};
+    const auto p2 = std::string{"BCE"};
+
+    SECTION("stl")
+    {
+        CHECK(std::search(begin(s), end(s), begin(p1), end(p1), icase_compare) == (begin(s) + 1));
+        CHECK(std::search(begin(s), end(s), begin(p2), end(p2), icase_compare) == (begin(s) + 1));
+    }
+}
+
+TEST_CASE("015 search with searcher")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 1, 2, 3, 4};
+    constexpr auto pat = std::array{1, 2, 3};
+    constexpr auto pat1 = std::array{4, 5, 6};
+
+    SECTION("stl")
+    {
+        CHECK(std::search(begin(arr), end(arr), std::boyer_moore_searcher(begin(pat), end(pat)))
+              == (begin(arr) + 1));
+        CHECK(std::search(begin(arr), end(arr), std::boyer_moore_searcher(begin(pat1), end(pat1)))
+              == end(arr));
+
+        CHECK(std::search(begin(arr), end(arr),
+                          std::boyer_moore_horspool_searcher(begin(pat), end(pat)))
+              == (begin(arr) + 1));
+        CHECK(std::search(begin(arr), end(arr),
+                          std::boyer_moore_horspool_searcher(begin(pat1), end(pat1)))
+              == end(arr));
     }
 }
