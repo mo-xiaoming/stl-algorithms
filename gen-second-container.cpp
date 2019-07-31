@@ -15,7 +15,7 @@ TEST_CASE("033 replace_copy")
     {
         auto dest = std::vector<int>{};
         std::replace_copy(begin(arr), end(arr), std::back_inserter(dest), 2, 7);
-        CHECK(std::equal(begin(dest), end(dest), begin(result), end(result)));
+        CHECK(equal(result, dest));
     }
 }
 
@@ -28,7 +28,7 @@ TEST_CASE("034 replace_copy_if")
     {
         auto dest = std::vector<int>{};
         std::replace_copy_if(begin(arr), end(arr), std::back_inserter(dest), is_even<int>, 7);
-        CHECK(std::equal(begin(dest), end(dest), begin(result), end(result)));
+        CHECK(equal(result, dest));
     }
 }
 
@@ -41,7 +41,7 @@ TEST_CASE("029 remove_copy")
     {
         auto dest = std::vector<int>{};
         std::remove_copy(begin(arr), end(arr), std::back_inserter(dest), 2);
-        CHECK(std::equal(begin(dest), end(dest), begin(result), end(result)));
+        CHECK(equal(result, dest));
     }
 }
 
@@ -54,7 +54,7 @@ TEST_CASE("030 remove_copy_if")
     {
         auto dest = std::vector<int>{};
         std::remove_copy_if(begin(arr), end(arr), std::back_inserter(dest), is_even<int>);
-        CHECK(std::equal(begin(dest), end(dest), begin(result), end(result)));
+        CHECK(equal(result, dest));
     }
 }
 
@@ -66,7 +66,7 @@ TEST_CASE("017 copy")
     {
         auto dest = std::vector<int>{};
         std::copy(begin(arr), end(arr), std::back_inserter(dest));
-        CHECK(std::equal(begin(arr), end(arr), begin(dest), end(dest)));
+        CHECK(equal(arr, dest));
     }
 }
 
@@ -79,7 +79,7 @@ TEST_CASE("018 copy_if")
     {
         auto dest = std::vector<int>{};
         std::copy_if(begin(arr), end(arr), std::back_inserter(dest), is_even<int>);
-        CHECK(std::equal(begin(dest), end(dest), begin(result), end(result)));
+        CHECK(equal(result, dest));
     }
 }
 
@@ -92,7 +92,7 @@ TEST_CASE("019 copy_n")
     {
         auto dest = std::vector<int>{};
         std::copy_n(begin(arr), 3, std::back_inserter(dest));
-        CHECK(std::equal(begin(dest), end(dest), begin(result), end(result)));
+        CHECK(equal(result, dest));
     }
 }
 
@@ -104,7 +104,7 @@ TEST_CASE("020 copy_backward")
     {
         auto dest = std::vector<int>(arr.size());
         std::copy_backward(begin(arr), end(arr), end(dest));
-        CHECK(std::equal(begin(arr), end(arr), begin(dest), end(dest)));
+        CHECK(equal(arr, dest));
     }
 }
 
@@ -116,7 +116,7 @@ TEST_CASE("021 move")
     {
         auto dest = std::vector<int>{};
         std::move(begin(arr), end(arr), std::back_inserter(dest));
-        CHECK(std::equal(begin(arr), end(arr), begin(dest), end(dest)));
+        CHECK(equal(arr, dest));
     }
 }
 
@@ -128,7 +128,7 @@ TEST_CASE("022 move_backward")
     {
         auto dest = std::vector<int>(arr.size());
         std::move_backward(begin(arr), end(arr), end(dest));
-        CHECK(std::equal(begin(arr), end(arr), begin(dest), end(dest)));
+        CHECK(equal(arr, dest));
     }
 }
 
@@ -142,6 +142,6 @@ TEST_CASE("023 transform with one input")
         auto dest = std::vector<int>{};
         std::transform(begin(arr), end(arr), std::back_inserter(dest),
                        [](auto i) { return i * i; });
-        CHECK(std::equal(begin(result), end(result), begin(dest), end(dest)));
+        CHECK(equal(result, dest));
     }
 }

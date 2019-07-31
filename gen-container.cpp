@@ -37,7 +37,7 @@ TEST_CASE("025 generate")
         auto n = 0;
         auto dest = std::vector<int>(result.size());
         std::generate(begin(dest), end(dest), [&n] { return ++n; });
-        CHECK(std::equal(begin(result), end(result), begin(dest), end(dest)));
+        CHECK(equal(result, dest));
     }
 }
 
@@ -50,7 +50,7 @@ TEST_CASE("026 generate_n")
         auto n = 0;
         auto dest = std::vector<int>(result.size());
         std::generate_n(begin(dest), result.size(), [&n] { return ++n; });
-        CHECK(std::equal(begin(result), end(result), begin(dest), end(dest)));
+        CHECK(equal(result, dest));
     }
 }
 
@@ -63,6 +63,6 @@ TEST_CASE("039 reverse_copy")
     {
         auto dest = std::vector<int>{};
         std::reverse_copy(begin(arr), end(arr), std::back_inserter(dest));
-        CHECK(std::equal(begin(dest), end(dest), begin(result), end(result)));
+        CHECK(equal(result, dest));
     }
 }

@@ -13,13 +13,13 @@ TEST_CASE("006 for_each")
     SECTION("stl")
     {
         std::for_each(begin(arr), end(arr), inc_self);
-        CHECK(std::equal(begin(arr), end(arr), begin(result)));
+        CHECK(equal(arr, result));
     }
 
     SECTION("my")
     {
         my_for_each(begin(arr), end(arr), inc_self);
-        CHECK(std::equal(begin(arr), end(arr), begin(result)));
+        CHECK(equal(arr, result));
     }
 }
 
@@ -31,13 +31,13 @@ TEST_CASE("007 for_each_n")
     {
         // could not get it build, because boost needs opencl for for_each_n?
         // boost::compute::for_each_n(begin(arr), 3, inc_self);
-        // CHECK(std::equal(begin(arr), end(arr), begin(result)));
+        // CHECK(equal(arr, result));
     }
 
     SECTION("my")
     {
         my_for_each_n(begin(arr), 3, inc_self);
-        CHECK(std::equal(begin(arr), end(arr), begin(result)));
+        CHECK(equal(arr, result));
     }
 }
 
@@ -49,6 +49,6 @@ TEST_CASE("037 iter_swap")
     SECTION("stl")
     {
         std::iter_swap(begin(arr), end(arr) - 1);
-        CHECK(std::equal(begin(arr), end(arr), begin(result), end(result)));
+        CHECK(equal(arr, result));
     }
 }

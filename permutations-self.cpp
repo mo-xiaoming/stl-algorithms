@@ -14,7 +14,7 @@ TEST_CASE("039 rotate")
     SECTION("stl")
     {
         std::rotate(begin(v), begin(v) + 2, end(v));
-        CHECK(std::equal(begin(v), end(v), begin(result), end(result)));
+        CHECK(equal(v, result));
     }
 }
 
@@ -27,7 +27,7 @@ TEST_CASE("040 rotate_copy")
     {
         auto dest = std::vector<int>{};
         std::rotate_copy(begin(v), begin(v) + 2, end(v), std::back_inserter(dest));
-        CHECK(std::equal(begin(dest), end(dest), begin(result), end(result)));
+        CHECK(equal(dest, result));
     }
 }
 

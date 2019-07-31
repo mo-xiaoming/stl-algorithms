@@ -17,6 +17,6 @@ TEST_CASE("023 transform with two input")
         auto dest = std::vector<int>{};
         std::transform(begin(arr1), end(arr1), begin(arr2), std::back_inserter(dest),
                        [](auto i, auto j) { return i + j; });
-        CHECK(std::equal(begin(result), end(result), begin(dest), end(dest)));
+        CHECK(equal(result, dest));
     }
 }

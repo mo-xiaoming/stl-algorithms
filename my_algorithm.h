@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <cctype>
 #include <utility>
 
@@ -17,6 +18,12 @@ inline bool icase_compare(char i, char j)
 inline constexpr void inc_self(int &t) noexcept
 {
     ++t;
+}
+
+template<typename C1, typename C2>
+inline bool equal(const C1 &c1, const C2 &c2) noexcept
+{
+    return std::equal(begin(c1), end(c1), begin(c2), end(c2));
 }
 
 template<typename It, typename V>
