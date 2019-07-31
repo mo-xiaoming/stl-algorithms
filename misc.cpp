@@ -40,3 +40,15 @@ TEST_CASE("007 for_each_n")
         CHECK(std::equal(begin(arr), end(arr), begin(result)));
     }
 }
+
+TEST_CASE("037 iter_swap")
+{
+    auto arr = std::vector{1, 2, 3, 4};
+    constexpr auto result = std::array{4, 2, 3, 1};
+
+    SECTION("stl")
+    {
+        std::iter_swap(begin(arr), end(arr) - 1);
+        CHECK(std::equal(begin(arr), end(arr), begin(result), end(result)));
+    }
+}
