@@ -1,12 +1,3 @@
-#include <algorithm>
-#include <array>
-#include <functional>
-#include <numeric>
-#include <iomanip>
-#include <iostream>
-#include <iterator>
-#include <random>
-#include <vector>
 #include <boost/sort/spreadsort/spreadsort.hpp>
 #include <boost/algorithm/sort_subrange.hpp>
 #include <boost/algorithm/is_partitioned_until.hpp>
@@ -18,27 +9,9 @@
 #include <boost/algorithm/is_palindrome.hpp>
 #include <boost/algorithm/clamp.hpp>
 
-namespace {
-template<typename C>
-void print_container(const C &c, const std::string &tag = "")
-{
-    std::cout << std::setw(30) << tag << ": ";
-    std::copy(cbegin(c), cend(c), std::ostream_iterator<typename C::value_type>(std::cout, " "));
-    std::cout << std::endl;
-}
-}
-
 int main()
 {
     auto d = std::vector{3, 5, 1, 9, 0, 8, 2, 4, 6, 8};
-
-    auto print = [&d](const std::string &tag) { print_container(d, tag); };
-    auto print_func = [](auto... ss) {
-        for (auto s : {ss...}) {
-            std::cout << std::setw(30) << s << std::endl;
-        }
-    };
-    print("original");
 
     // heap
     std::make_heap(begin(d), end(d));
@@ -273,7 +246,7 @@ int main()
     }
 
     print_func("remove_if", "remove_copy_if", "replace_if",
-               "replace_copy_if", "copy_if");
+               "replace_copy_if");
 
     {
         d = {0, 1, 2, 3, 4, 5, 6};
@@ -285,5 +258,5 @@ int main()
         print("trasform 2d");
     }
 
-    print_func("copy_n", "generate_n", "fill_n", "search_n");
+    print_func("copy_n", "generate_n", "fill_n");
 }
