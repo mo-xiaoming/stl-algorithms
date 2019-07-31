@@ -224,8 +224,6 @@ int main()
         print("swap_ranges");
     }
 
-    generate(d.begin(), d.end(), [] { return 3; });
-    print("generate with 3");
     iota(d.begin(), d.end(), 42);
     print("iota from 42");
 
@@ -233,15 +231,11 @@ int main()
     print("replace 42 with 43");
 
     {
-        auto i = remove(d.begin(), d.end(), 43);
-        print("remove elems begin @" + std::to_string(distance(d.begin(), i)));
         d = {1, 2, 3, 3, 3, 4, 3, 5, 6};
         auto j = unique(d.begin(), d.end());
         print("unique elems ends @" + std::to_string(distance(d.begin(), j)));
     }
 
-    print_func("remove_if", "remove_copy_if", "replace_if",
+    print_func( "remove_copy_if", "replace_if",
                "replace_copy_if");
-
-    print_func( "generate_n");
 }

@@ -27,3 +27,29 @@ TEST_CASE("024 fill_n")
         CHECK(std::all_of(begin(v) + 4, end(v), [](auto i) { return i == 0; }));
     }
 }
+
+TEST_CASE("025 generate")
+{
+    constexpr auto result = std::array{1, 2, 3, 4, 5};
+
+    SECTION("stl")
+    {
+        auto n = 0;
+        auto dest = std::vector<int>(result.size());
+        std::generate(begin(dest), end(dest), [&n] { return ++n; });
+        CHECK(std::equal(begin(result), end(result), begin(dest), end(dest)));
+    }
+}
+
+TEST_CASE("026 generate_n")
+{
+    constexpr auto result = std::array{1, 2, 3, 4, 5};
+
+    SECTION("stl")
+    {
+        auto n = 0;
+        auto dest = std::vector<int>(result.size());
+        std::generate_n(begin(dest), result.size(), [&n] { return ++n; });
+        CHECK(std::equal(begin(result), end(result), begin(dest), end(dest)));
+    }
+}
