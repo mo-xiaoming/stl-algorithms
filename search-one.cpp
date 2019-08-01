@@ -85,3 +85,13 @@ TEST_CASE("013 find_first_of with func")
               == (begin(arr) + 1));
     }
 }
+
+TEST_CASE("049 partition_point")
+{
+    constexpr auto arr = std::array{0, 2, 4, 1, 2, 3};
+
+    SECTION("stl")
+    {
+        CHECK(std::partition_point(begin(arr), end(arr), is_even<int>) == begin(arr) + 3);
+    }
+}

@@ -126,3 +126,15 @@ TEST_CASE("005 none_of: true if range is empty")
         CHECK(my_none_of(begin(Empty_Array), end(Empty_Array), [](auto) { return false; }));
     }
 }
+
+TEST_CASE("047 is_partitioned")
+{
+    constexpr auto a = std::array{0, 2, 4, 1, 3, 5};
+    constexpr auto b = std::array{0, 1, 2, 3, 4, 5};
+
+    SECTION("stl")
+    {
+        CHECK(std::is_partitioned(begin(a), end(a), is_even<int>));
+        CHECK(std::is_partitioned(begin(b), end(b), is_even<int>) == false);
+    }
+}
