@@ -45,3 +45,11 @@ TEST_CASE("008 mismatch with func")
         CHECK(*i == 'o');
     }
 }
+
+TEST_CASE("062 includes")
+{
+    constexpr auto a = std::array{0, 1, 2, 3, 4, 5};
+    constexpr auto b = std::array{1, 2, 3};
+
+    SECTION("stl") { CHECK(std::includes(begin(a), end(a), begin(b), end(b))); }
+}

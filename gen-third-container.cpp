@@ -20,3 +20,31 @@ TEST_CASE("023 transform with two input")
         CHECK(equal(result, dest));
     }
 }
+
+TEST_CASE("063 set_difference")
+{
+    constexpr auto a = std::array{0, 1, 2, 3, 4};
+    constexpr auto b = std::array{3, 4, 5};
+    constexpr auto result = std::array{0, 1, 2};
+
+    SECTION("stl")
+    {
+        auto v = std::vector<int>{};
+        std::set_difference(begin(a), end(a), begin(b), end(b), std::back_inserter(v));
+        CHECK(equal(v, result));
+    }
+}
+
+TEST_CASE("064 set_intersection")
+{
+    constexpr auto a = std::array{0, 1, 2, 3, 4};
+    constexpr auto b = std::array{3, 4, 5};
+    constexpr auto result = std::array{3, 4};
+
+    SECTION("stl")
+    {
+        auto v = std::vector<int>{};
+        std::set_intersection(begin(a), end(a), begin(b), end(b), std::back_inserter(v));
+        CHECK(equal(v, result));
+    }
+}
