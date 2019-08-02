@@ -132,3 +132,14 @@ TEST_CASE("056-057 lower_bound/upper_bound")
         CHECK(std::equal(lower, upper, begin(frag), end(frag)));
     }
 }
+
+TEST_CASE("058 binary_search")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5, 6};
+
+    SECTION("stl")
+    {
+        CHECK(std::binary_search(begin(arr), end(arr), 3));
+        CHECK(std::binary_search(begin(arr), end(arr), 7) == false);
+    }
+}
