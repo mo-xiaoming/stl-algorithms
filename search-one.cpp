@@ -120,19 +120,6 @@ TEST_CASE("057 upper_bound")
     }
 }
 
-TEST_CASE("056-057 lower_bound/upper_bound")
-{
-    constexpr auto arr = std::array{0, 1, 2, 3, 3, 3, 3, 4, 5};
-
-    SECTION("stl")
-    {
-        constexpr auto frag = std::array{3, 3, 3, 3};
-        auto lower = std::lower_bound(begin(arr), end(arr), 3);
-        auto upper = std::upper_bound(begin(arr), end(arr), 3);
-        CHECK(std::equal(lower, upper, begin(frag), end(frag)));
-    }
-}
-
 TEST_CASE("058 binary_search")
 {
     constexpr auto arr = std::array{0, 1, 2, 3, 4, 5, 6};

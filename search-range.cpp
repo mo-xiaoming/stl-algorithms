@@ -98,3 +98,30 @@ TEST_CASE("016 search_n with func")
               == (begin(arr) + 1));
     }
 }
+
+TEST_CASE("056-057 lower_bound/upper_bound")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 3, 3, 3, 4, 5};
+
+    SECTION("stl")
+    {
+        constexpr auto frag = std::array{3, 3, 3, 3};
+        auto lower = std::lower_bound(begin(arr), end(arr), 3);
+        auto upper = std::upper_bound(begin(arr), end(arr), 3);
+        CHECK(std::equal(lower, upper, begin(frag), end(frag)));
+    }
+}
+
+TEST_CASE("059 equal_range")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 3, 3, 3, 4, 5};
+
+    SECTION("stl")
+    {
+        auto lower = std::lower_bound(begin(arr), end(arr), 3);
+        auto upper = std::upper_bound(begin(arr), end(arr), 3);
+        auto [i, j] = std::equal_range(begin(arr), end(arr), 3);
+        CHECK(i == lower);
+        CHECK(j == upper);
+    }
+}
