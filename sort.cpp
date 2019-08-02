@@ -91,3 +91,17 @@ TEST_CASE("054 nth_element")
         CHECK(*std::min_element(begin(v), begin(v) + 2) == *(begin(v) + 1));
     }
 }
+
+TEST_CASE("060 merge")
+{
+    constexpr auto a = std::array{0, 2, 3, 5};
+    constexpr auto b = std::array{2, 6, 7};
+    constexpr auto result = std::array{0, 2, 2, 3, 5, 6, 7};
+
+    SECTION("stl")
+    {
+        auto v = std::vector<int>{};
+        std::merge(begin(a), end(a), begin(b), end(b), std::back_inserter(v));
+        CHECK(equal(result, v));
+    }
+}
