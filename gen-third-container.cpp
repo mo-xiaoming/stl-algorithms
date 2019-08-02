@@ -48,3 +48,31 @@ TEST_CASE("064 set_intersection")
         CHECK(equal(v, result));
     }
 }
+
+TEST_CASE("065 set_symmetric_difference")
+{
+    constexpr auto a = std::array{0, 1, 2, 3, 4};
+    constexpr auto b = std::array{3, 4, 5};
+    constexpr auto result = std::array{0, 1, 2, 5};
+
+    SECTION("stl")
+    {
+        auto v = std::vector<int>{};
+        std::set_symmetric_difference(begin(a), end(a), begin(b), end(b), std::back_inserter(v));
+        CHECK(equal(v, result));
+    }
+}
+
+TEST_CASE("066 set_union")
+{
+    constexpr auto a = std::array{0, 1, 2, 3, 4};
+    constexpr auto b = std::array{3, 4, 5};
+    constexpr auto result = std::array{0, 1, 2, 3, 4, 5};
+
+    SECTION("stl")
+    {
+        auto v = std::vector<int>{};
+        std::set_union(begin(a), end(a), begin(b), end(b), std::back_inserter(v));
+        CHECK(equal(v, result));
+    }
+}
