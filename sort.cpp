@@ -67,3 +67,27 @@ TEST_CASE("051 partial_sort")
         CHECK(std::equal(begin(v), begin(v) + 2, begin(result), end(result)));
     }
 }
+
+TEST_CASE("053 stable_sort")
+{
+    auto v = std::vector{1, 2, 3, 4};
+    constexpr auto result = std::array{4, 3};
+
+    SECTION("stl")
+    {
+        std::partial_sort(begin(v), begin(v) + 2, end(v), std::greater<int>());
+        CHECK(std::equal(begin(v), begin(v) + 2, begin(result), end(result)));
+    }
+}
+
+TEST_CASE("054 nth_element")
+{
+    auto v = std::vector{1, 2, 3, 4, 5, 6};
+
+    SECTION("stl")
+    {
+        std::nth_element(begin(v), begin(v) + 1, end(v), std::greater<int>());
+        CHECK(*(begin(v) + 1) == 5);
+        CHECK(*std::min_element(begin(v), begin(v) + 2) == *(begin(v) + 1));
+    }
+}

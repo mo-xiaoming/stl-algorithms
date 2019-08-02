@@ -95,3 +95,27 @@ TEST_CASE("049 partition_point")
         CHECK(std::partition_point(begin(arr), end(arr), is_even<int>) == begin(arr) + 3);
     }
 }
+
+TEST_CASE("056 lower_bound")
+{
+    constexpr auto arr = std::array{0, 2, 4, 6, 8};
+
+    SECTION("stl")
+    {
+        CHECK(*std::lower_bound(begin(arr), end(arr), 5, std::less<int>()) == 6);
+        CHECK(*std::lower_bound(begin(arr), end(arr), 6, std::less<int>()) == 6);
+        CHECK(std::lower_bound(begin(arr), end(arr), 9, std::less<int>()) == end(arr));
+    }
+}
+
+TEST_CASE("057 upper_bound")
+{
+    constexpr auto arr = std::array{0, 2, 4, 6, 8};
+
+    SECTION("stl")
+    {
+        CHECK(*std::upper_bound(begin(arr), end(arr), 5, std::less<int>()) == 6);
+        CHECK(*std::upper_bound(begin(arr), end(arr), 6, std::less<int>()) == 8);
+        CHECK(std::upper_bound(begin(arr), end(arr), 9, std::less<int>()) == end(arr));
+    }
+}

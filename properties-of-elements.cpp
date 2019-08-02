@@ -150,3 +150,13 @@ TEST_CASE("050 is_sorted")
         CHECK(std::is_sorted(begin(b), end(b), std::greater<int>()) == false);
     }
 }
+
+TEST_CASE("055 is_sorted_until")
+{
+    constexpr auto arr = std::array{6, 5, 4, 7, 2, 3};
+
+    SECTION("stl")
+    {
+        CHECK(std::is_sorted_until(begin(arr), end(arr), std::greater<int>()) == begin(arr) + 3);
+    }
+}
