@@ -105,3 +105,17 @@ TEST_CASE("060 merge")
         CHECK(equal(result, v));
     }
 }
+
+TEST_CASE("061 inplace_merge")
+{
+    auto v = std::vector{2, 6, 4, 7, 3, 5, 8, 3};
+    constexpr auto result = std::array{2, 3, 3, 4, 5, 6, 7, 8};
+
+    SECTION("stl")
+    {
+        std::sort(begin(v), begin(v) + 4);
+        std::sort(begin(v) + 4, end(v));
+        std::inplace_merge(begin(v), begin(v) + 4, end(v));
+        CHECK(equal(v, result));
+    }
+}
