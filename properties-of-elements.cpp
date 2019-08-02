@@ -138,3 +138,15 @@ TEST_CASE("047 is_partitioned")
         CHECK(std::is_partitioned(begin(b), end(b), is_even<int>) == false);
     }
 }
+
+TEST_CASE("050 is_sorted")
+{
+    constexpr auto a = std::array{4, 3, 2, 1};
+    constexpr auto b = std::array{1, 2, 3, 4};
+
+    SECTION("stl")
+    {
+        CHECK(std::is_sorted(begin(a), end(a), std::greater<int>()));
+        CHECK(std::is_sorted(begin(b), end(b), std::greater<int>()) == false);
+    }
+}

@@ -145,3 +145,16 @@ TEST_CASE("023 transform with one input")
         CHECK(equal(result, dest));
     }
 }
+
+TEST_CASE("052 partial_sort_copy")
+{
+    constexpr auto arr = std::array{1, 2, 3, 4, 5};
+    constexpr auto result = std::array{5, 4, 3, 2};
+
+    SECTION("stl")
+    {
+        auto v = std::vector{11, 12, 33, 44};
+        std::partial_sort_copy(begin(arr), end(arr), begin(v), end(v), std::greater<int>());
+        CHECK(equal(result, v));
+    }
+}

@@ -1,4 +1,2 @@
-.vscode
-cpp-guru.*
-a.out
 build
+CMakeLists.txt.user

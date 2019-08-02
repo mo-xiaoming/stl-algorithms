@@ -43,3 +43,27 @@ TEST_CASE("048 partitioin_copy")
         CHECK(equal(n, result2));
     }
 }
+
+TEST_CASE("049 sort")
+{
+    auto v = std::vector{1, 2, 3, 4};
+    constexpr auto result = std::array{4, 3, 2, 1};
+
+    SECTION("stl")
+    {
+        std::sort(begin(v), end(v), std::greater<int>());
+        CHECK(equal(v, result));
+    }
+}
+
+TEST_CASE("051 partial_sort")
+{
+    auto v = std::vector{1, 2, 3, 4};
+    constexpr auto result = std::array{4, 3};
+
+    SECTION("stl")
+    {
+        std::partial_sort(begin(v), begin(v) + 2, end(v), std::greater<int>());
+        CHECK(std::equal(begin(v), begin(v) + 2, begin(result), end(result)));
+    }
+}
