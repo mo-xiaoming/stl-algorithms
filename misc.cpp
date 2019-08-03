@@ -52,3 +52,13 @@ TEST_CASE("037 iter_swap")
         CHECK(equal(arr, result));
     }
 }
+
+TEST_CASE("080 clamp")
+{
+    SECTION("stl")
+    {
+        CHECK(std::clamp(3, 1, 4) == 3);
+        CHECK(std::clamp(3, 4, 7) == 4);
+        CHECK(std::clamp(5, 1, 4) == 4);
+    }
+}
