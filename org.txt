@@ -37,8 +37,6 @@ int main()
     adjacent_difference(d.begin(), d.end(), d.begin());
     print("adjacent_difference");
 
-    print("lexicographic_compare to self: " + std::to_string(equal(d.begin(), d.end(), d.begin())));
-
     iota(d.begin(), d.end(), 42);
     print("iota from 42");
 }

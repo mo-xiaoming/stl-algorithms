@@ -53,3 +53,23 @@ TEST_CASE("062 includes")
 
     SECTION("stl") { CHECK(std::includes(begin(a), end(a), begin(b), end(b))); }
 }
+
+TEST_CASE("081 equal")
+{
+    constexpr auto a = std::array{0, 1, 2, 3, 4, 5};
+    constexpr auto b = std::array{1, 2, 3};
+
+    SECTION("stl")
+    {
+        CHECK(std::equal(begin(a), end(a), begin(a), end(a)));
+        CHECK(std::equal(begin(a), end(a), begin(b), end(b)) == false);
+    }
+}
+
+TEST_CASE("082 lexicographical_equal")
+{
+    constexpr auto a = std::array{3, 4, 5, 6};
+    constexpr auto b = std::array{4, 0, 0, 0};
+
+    SECTION("stl") { CHECK(std::lexicographical_compare(begin(a), end(a), begin(b), end(b))); }
+}
