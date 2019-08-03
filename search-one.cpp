@@ -130,3 +130,20 @@ TEST_CASE("058 binary_search")
         CHECK(std::binary_search(begin(arr), end(arr), 7) == false);
     }
 }
+
+TEST_CASE("055 is_sorted_until")
+{
+    constexpr auto arr = std::array{6, 5, 4, 7, 2, 3};
+
+    SECTION("stl")
+    {
+        CHECK(std::is_sorted_until(begin(arr), end(arr), std::greater<int>()) == begin(arr) + 3);
+    }
+}
+
+TEST_CASE("069 is_heap_until")
+{
+    constexpr auto arr = std::array{9, 5, 4, 8, 1, 3};
+
+    SECTION("stl") { CHECK(std::is_heap_until(begin(arr), end(arr)) == begin(arr) + 3); }
+}

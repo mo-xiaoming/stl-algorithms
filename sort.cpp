@@ -119,3 +119,53 @@ TEST_CASE("061 inplace_merge")
         CHECK(equal(v, result));
     }
 }
+
+TEST_CASE("067 make_heap")
+{
+    auto v = std::vector{3, 1, 4, 1, 5, 9};
+    constexpr auto result = std::array{9, 5, 4, 1, 1, 3};
+
+    SECTION("stl")
+    {
+        std::make_heap(begin(v), end(v));
+        CHECK(equal(v, result));
+    }
+}
+
+TEST_CASE("071 sort_heap")
+{
+    auto v = std::vector{3, 1, 4, 1, 5, 9};
+    constexpr auto result = std::array{1, 1, 3, 4, 5, 9};
+
+    SECTION("stl")
+    {
+        std::make_heap(begin(v), end(v));
+        std::sort_heap(begin(v), end(v));
+        CHECK(equal(v, result));
+    }
+}
+
+TEST_CASE("072 push_heap")
+{
+    auto v = std::vector{9, 5, 4, 1, 1, 3};
+    constexpr auto result = std::array{9, 5, 6, 1, 1, 3, 4};
+
+    SECTION("stl")
+    {
+        v.push_back(6);
+        std::push_heap(begin(v), end(v));
+        CHECK(equal(v, result));
+    }
+}
+
+TEST_CASE("073 pop_heap")
+{
+    auto v = std::vector{9, 5, 4, 1, 1, 3};
+    constexpr auto result = std::array{5, 3, 4, 1, 1, 9};
+
+    SECTION("stl")
+    {
+        std::pop_heap(begin(v), end(v));
+        CHECK(equal(v, result));
+    }
+}

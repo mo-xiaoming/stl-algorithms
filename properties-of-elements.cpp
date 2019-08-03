@@ -151,12 +151,14 @@ TEST_CASE("050 is_sorted")
     }
 }
 
-TEST_CASE("055 is_sorted_until")
+TEST_CASE("068 is_heap")
 {
-    constexpr auto arr = std::array{6, 5, 4, 7, 2, 3};
+    auto v = std::vector{3, 2, 5, 3, 6};
 
     SECTION("stl")
     {
-        CHECK(std::is_sorted_until(begin(arr), end(arr), std::greater<int>()) == begin(arr) + 3);
+        CHECK(std::is_heap(begin(v), end(v)) == false);
+        std::make_heap(begin(v), end(v));
+        CHECK(std::is_heap(begin(v), end(v)));
     }
 }

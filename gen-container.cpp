@@ -7,7 +7,7 @@
 
 #include "my_algorithm.h"
 
-TEST_CASE("023 fill")
+TEST_CASE("070 fill")
 {
     auto v = std::vector<int>(10, 0);
     SECTION("stl")
