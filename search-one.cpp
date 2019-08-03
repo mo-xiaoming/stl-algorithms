@@ -171,3 +171,25 @@ TEST_CASE("077 min_element")
 
     SECTION("stl") { CHECK(*std::min_element(begin(arr), end(arr)) == 4); }
 }
+
+TEST_CASE("078 minmax_element")
+{
+    constexpr auto arr = std::array{9, 5, 4, 8};
+
+    SECTION("stl")
+    {
+        const auto [i, j] = std::minmax_element(begin(arr), end(arr));
+        CHECK(*i == 4);
+        CHECK(*j == 9);
+    }
+}
+
+TEST_CASE("079 minmax")
+{
+    SECTION("stl")
+    {
+        const auto [i, j] = std::minmax({9, 5, 4, 8});
+        CHECK(i == 4);
+        CHECK(j == 9);
+    }
+}
