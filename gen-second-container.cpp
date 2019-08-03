@@ -158,3 +158,77 @@ TEST_CASE("052 partial_sort_copy")
         CHECK(equal(result, v));
     }
 }
+
+TEST_CASE("039 reverse_copy")
+{
+    constexpr auto arr = std::array{1, 2, 3, 4};
+    constexpr auto result = std::array{4, 3, 2, 1};
+
+    SECTION("stl")
+    {
+        auto dest = std::vector<int>{};
+        std::reverse_copy(begin(arr), end(arr), std::back_inserter(dest));
+        CHECK(equal(result, dest));
+    }
+}
+
+TEST_CASE("044 unique_copy")
+{
+    auto v = std::vector{1, 2, 2, 3, 2};
+    constexpr auto result = std::array{1, 2, 3, 2};
+
+    SECTION("stl")
+    {
+        auto dest = std::vector<int>{};
+        std::unique_copy(begin(v), end(v), std::back_inserter(dest));
+        CHECK(equal(dest, result));
+    }
+}
+
+TEST_CASE("040 rotate_copy")
+{
+    auto v = std::vector{1, 2, 3, 4, 5};
+    constexpr auto result = std::array{3, 4, 5, 1, 2};
+
+    SECTION("stl")
+    {
+        auto dest = std::vector<int>{};
+        std::rotate_copy(begin(v), begin(v) + 2, end(v), std::back_inserter(dest));
+        CHECK(equal(dest, result));
+    }
+}
+
+TEST_CASE("042 sample")
+{
+    auto v = std::vector{1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7};
+
+    SECTION("stl")
+    {
+        auto dest = std::vector<int>{};
+        std::sample(begin(v), end(v), std::back_inserter(dest), 7,
+                    std::mt19937{std::random_device{}()});
+        CHECK(dest.size() == 7);
+        std::sort(begin(v), end(v));
+        std::sort(begin(dest), end(dest));
+        CHECK(std::includes(begin(v), end(v), begin(dest), end(dest)));
+    }
+}
+
+TEST_CASE("048 partitioin_copy")
+{
+    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5};
+    constexpr auto result1 = std::array{0, 2, 4};
+    constexpr auto result2 = std::array{1, 3, 5};
+
+    SECTION("stl")
+    {
+        auto m = std::vector<int>{};
+        auto n = std::vector<int>{};
+
+        std::partition_copy(begin(arr), end(arr), std::back_inserter(m), std::back_inserter(n),
+                            is_even<int>);
+
+        CHECK(equal(m, result1));
+        CHECK(equal(n, result2));
+    }
+}

@@ -78,16 +78,3 @@ TEST_CASE("043 unique")
         CHECK(equal(v, result));
     }
 }
-
-TEST_CASE("044 unique_copy")
-{
-    auto v = std::vector{1, 2, 2, 3, 2};
-    constexpr auto result = std::array{1, 2, 3, 2};
-
-    SECTION("stl")
-    {
-        auto dest = std::vector<int>{};
-        std::unique_copy(begin(v), end(v), std::back_inserter(dest));
-        CHECK(equal(dest, result));
-    }
-}

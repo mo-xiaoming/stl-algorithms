@@ -24,16 +24,6 @@ TEST_CASE("014 adjacent_find with func")
     }
 }
 
-TEST_CASE("088 accumulate")
-{
-    constexpr auto arr = std::array{1, 2, 3, 4};
-
-    SECTION("stl")
-    {
-        CHECK(std::accumulate(begin(arr), end(arr), 1, std::multiplies<int>()) == 24);
-    }
-}
-
 TEST_CASE("090 adjacent_difference")
 {
     auto v = std::vector{0, 3, 2, 9, 8};

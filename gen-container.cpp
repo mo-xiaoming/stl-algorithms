@@ -54,19 +54,6 @@ TEST_CASE("026 generate_n")
     }
 }
 
-TEST_CASE("039 reverse_copy")
-{
-    constexpr auto arr = std::array{1, 2, 3, 4};
-    constexpr auto result = std::array{4, 3, 2, 1};
-
-    SECTION("stl")
-    {
-        auto dest = std::vector<int>{};
-        std::reverse_copy(begin(arr), end(arr), std::back_inserter(dest));
-        CHECK(equal(result, dest));
-    }
-}
-
 TEST_CASE("087 iota")
 {
     auto v = std::vector<int>(4);

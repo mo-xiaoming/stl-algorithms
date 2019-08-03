@@ -15,3 +15,13 @@ TEST_CASE("092 reduce")
         CHECK(std::reduce(begin(arr), end(arr), 0), == 6);
     }
 }
+
+TEST_CASE("088 accumulate")
+{
+    constexpr auto arr = std::array{1, 2, 3, 4};
+
+    SECTION("stl")
+    {
+        CHECK(std::accumulate(begin(arr), end(arr), 1, std::multiplies<int>()) == 24);
+    }
+}

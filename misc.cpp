@@ -62,3 +62,16 @@ TEST_CASE("080 clamp")
         CHECK(std::clamp(5, 1, 4) == 4);
     }
 }
+
+TEST_CASE("036 swap_ranges")
+{
+    auto a = std::vector{1, 1, 1, 1};
+    auto b = std::vector{2, 2, 2, 2};
+
+    SECTION("stl")
+    {
+        std::swap_ranges(begin(a), end(a), begin(b));
+        CHECK(std::all_of(begin(a), end(a), [](auto i) { return i == 2; }));
+        CHECK(std::all_of(begin(b), end(b), [](auto i) { return i == 1; }));
+    }
+}

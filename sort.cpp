@@ -25,25 +25,6 @@ TEST_CASE("046 stable_partition")
     }
 }
 
-TEST_CASE("048 partitioin_copy")
-{
-    constexpr auto arr = std::array{0, 1, 2, 3, 4, 5};
-    constexpr auto result1 = std::array{0, 2, 4};
-    constexpr auto result2 = std::array{1, 3, 5};
-
-    SECTION("stl")
-    {
-        auto m = std::vector<int>{};
-        auto n = std::vector<int>{};
-
-        std::partition_copy(begin(arr), end(arr), std::back_inserter(m), std::back_inserter(n),
-                            is_even<int>);
-
-        CHECK(equal(m, result1));
-        CHECK(equal(n, result2));
-    }
-}
-
 TEST_CASE("049 sort")
 {
     auto v = std::vector{1, 2, 3, 4};
@@ -71,12 +52,12 @@ TEST_CASE("051 partial_sort")
 TEST_CASE("053 stable_sort")
 {
     auto v = std::vector{1, 2, 3, 4};
-    constexpr auto result = std::array{4, 3};
+    constexpr auto result = std::array{4, 3, 2, 1};
 
     SECTION("stl")
     {
-        std::partial_sort(begin(v), begin(v) + 2, end(v), std::greater<int>());
-        CHECK(std::equal(begin(v), begin(v) + 2, begin(result), end(result)));
+        std::sort(begin(v), end(v), std::greater<int>());
+        CHECK(equal(v, result));
     }
 }
 
