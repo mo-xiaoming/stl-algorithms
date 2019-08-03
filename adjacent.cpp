@@ -23,3 +23,13 @@ TEST_CASE("014 adjacent_find with func")
               == (begin(arr) + 4));
     }
 }
+
+TEST_CASE("088 accumulate")
+{
+    constexpr auto arr = std::array{1, 2, 3, 4};
+
+    SECTION("stl")
+    {
+        CHECK(std::accumulate(begin(arr), end(arr), 1, std::multiplies<int>()) == 24);
+    }
+}
