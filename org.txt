@@ -1,22 +1,6 @@
 int main()
 {
     {
-        d = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        print("new sorted std::vector");
-        auto i = 0;
-        while (next_permutation(d.begin(), d.end())) {
-            ++i;
-        }
-        print("next_permutation 10!-1(" + std::to_string(i) + ")times");
-        prev_permutation(d.begin(), d.end());
-        print("prev_permutation");
-
-        print("is_permuation to self: "
-              + std::to_string(is_permutation(d.begin(), d.end(), d.rbegin())));
-    }
-
-
-    {
         auto s = accumulate(d.begin() + 1, d.end(), 1, std::multiplies<>());
         print("accumulate by multiply: " + std::to_string(s));
     }

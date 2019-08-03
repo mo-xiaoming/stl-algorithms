@@ -57,3 +57,23 @@ TEST_CASE("042 sample")
         CHECK(std::includes(begin(v), end(v), begin(dest), end(dest)));
     }
 }
+
+TEST_CASE("085 next_permutation")
+{
+    constexpr auto arr = std::array{0, 1, 2};
+    auto v = std::vector(begin(arr), end(arr));
+
+    SECTION("stl")
+    {
+        CHECK(std::next_permutation(begin(v), end(v)));
+        CHECK(std::is_permutation(begin(v), end(v), begin(arr)));
+    }
+}
+
+TEST_CASE("086 prev_permutation")
+{
+    constexpr auto arr = std::array{0, 1, 2};
+    auto v = std::vector(begin(arr), end(arr));
+
+    SECTION("stl") { CHECK(std::prev_permutation(begin(v), end(v)) == false); }
+}

@@ -162,3 +162,16 @@ TEST_CASE("068 is_heap")
         CHECK(std::is_heap(begin(v), end(v)));
     }
 }
+
+TEST_CASE("083 is_pemutation")
+{
+    constexpr auto a = std::array{0, 1, 2, 3, 4};
+    constexpr auto b = std::array{3, 2, 1, 4, 0};
+    constexpr auto c = std::array{3, 5, 1, 4, 0};
+
+    SECTION("stl")
+    {
+        CHECK(std::is_permutation(begin(a), end(a), begin(b)));
+        CHECK(std::is_permutation(begin(a), end(a), begin(c)) == false);
+    };
+}
