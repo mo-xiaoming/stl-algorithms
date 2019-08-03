@@ -1,9 +1,0 @@
-int main()
-{
-    print("reduce: not in stl");
-    print("transform_reduce: not in stl");
-
-
-    print("(transform)_(e|i)nclusive_scan: not in stl");
-
-}
