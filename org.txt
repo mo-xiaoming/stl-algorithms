@@ -1,23 +1,9 @@
 int main()
 {
-    {
-        auto s = accumulate(d.begin() + 1, d.end(), 1, std::multiplies<>());
-        print("accumulate by multiply: " + std::to_string(s));
-    }
-
     print("reduce: not in stl");
     print("transform_reduce: not in stl");
 
-    partial_sum(d.begin(), d.end(), d.begin());
-    print("partion_sum");
 
     print("(transform)_(e|i)nclusive_scan: not in stl");
 
-    {
-        auto s = inner_product(d.begin(), d.end(), d.begin(), 0);
-        print("inner_product: s" + std::to_string(s));
-    }
-
-    adjacent_difference(d.begin(), d.end(), d.begin());
-    print("adjacent_difference");
 }

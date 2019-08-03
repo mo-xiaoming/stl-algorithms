@@ -33,3 +33,29 @@ TEST_CASE("088 accumulate")
         CHECK(std::accumulate(begin(arr), end(arr), 1, std::multiplies<int>()) == 24);
     }
 }
+
+TEST_CASE("090 adjacent_difference")
+{
+    auto v = std::vector{0, 3, 2, 9, 8};
+    constexpr auto result = std::array{0, 3, -1, 7, -1};
+
+    SECTION("stl")
+    {
+        auto dest = std::vector<int>{};
+        std::adjacent_difference(begin(v), end(v), std::back_inserter(dest));
+        CHECK(equal(result, dest));
+    }
+}
+
+TEST_CASE("091 partial_sum")
+{
+    auto v = std::vector{0, 3, 2, 9, 8};
+    constexpr auto result = std::array{0, 3, 5, 14, 22};
+
+    SECTION("stl")
+    {
+        auto dest = std::vector<int>{};
+        std::partial_sum(begin(v), end(v), std::back_inserter(dest));
+        CHECK(equal(result, dest));
+    }
+}
