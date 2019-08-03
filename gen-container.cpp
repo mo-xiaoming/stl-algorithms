@@ -66,3 +66,15 @@ TEST_CASE("039 reverse_copy")
         CHECK(equal(result, dest));
     }
 }
+
+TEST_CASE("087 iota")
+{
+    auto v = std::vector<int>(4);
+    constexpr auto result = std::array{5, 6, 7, 8};
+
+    SECTION("stl")
+    {
+        std::iota(begin(v), end(v), 5);
+        CHECK(equal(v, result));
+    }
+}

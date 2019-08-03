@@ -20,7 +20,4 @@ int main()
 
     adjacent_difference(d.begin(), d.end(), d.begin());
     print("adjacent_difference");
-
-    iota(d.begin(), d.end(), 42);
-    print("iota from 42");
 }
