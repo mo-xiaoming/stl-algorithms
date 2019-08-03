@@ -147,3 +147,27 @@ TEST_CASE("069 is_heap_until")
 
     SECTION("stl") { CHECK(std::is_heap_until(begin(arr), end(arr)) == begin(arr) + 3); }
 }
+
+TEST_CASE("074 max")
+{
+    SECTION("stl") { CHECK(std::max({9, 5, 4, 8, 6}) == 9); }
+}
+
+TEST_CASE("075 min")
+{
+    SECTION("stl") { CHECK(std::min({9, 5, 4, 8, 6}) == 4); }
+}
+
+TEST_CASE("076 max_element")
+{
+    constexpr auto arr = std::array{9, 5, 4, 8};
+
+    SECTION("stl") { CHECK(*std::max_element(begin(arr), end(arr)) == 9); }
+}
+
+TEST_CASE("077 min_element")
+{
+    constexpr auto arr = std::array{9, 5, 4, 8};
+
+    SECTION("stl") { CHECK(*std::min_element(begin(arr), end(arr)) == 4); }
+}
