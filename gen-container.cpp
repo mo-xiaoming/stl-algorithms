@@ -23,8 +23,8 @@ TEST_CASE("024 fill_n")
     SECTION("stl")
     {
         std::fill_n(begin(v), 4, 1);
-        CHECK(std::all_of(begin(v), begin(v) + 4, [](auto i) { return i == 1; }));
-        CHECK(std::all_of(begin(v) + 4, end(v), [](auto i) { return i == 0; }));
+        CHECK(std::all_of(begin(v), std::next(begin(v), 4), [](auto i) { return i == 1; }));
+        CHECK(std::all_of(std::next(begin(v), 4), end(v), [](auto i) { return i == 0; }));
     }
 }
 
@@ -34,9 +34,8 @@ TEST_CASE("025 generate")
 
     SECTION("stl")
     {
-        auto n = 0;
         auto dest = std::vector<int>(result.size());
-        std::generate(begin(dest), end(dest), [&n] { return ++n; });
+        std::generate(begin(dest), end(dest), [n=0]()mutable{ return ++n; });
         CHECK(equal(result, dest));
     }
 }
@@ -47,9 +46,8 @@ TEST_CASE("026 generate_n")
 
     SECTION("stl")
     {
-        auto n = 0;
         auto dest = std::vector<int>(result.size());
-        std::generate_n(begin(dest), result.size(), [&n] { return ++n; });
+        std::generate_n(begin(dest), result.size(), [n=0]()mutable{ return ++n; });
         CHECK(equal(result, dest));
     }
 }

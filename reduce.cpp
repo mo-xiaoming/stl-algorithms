@@ -12,7 +12,7 @@ TEST_CASE("092 reduce")
 
     SECTION("stl")
     {
-        CHECK(std::reduce(begin(arr), end(arr), 0), == 6);
+        CHECK(std::reduce(begin(arr), end(arr), 0) == 6);
     }
 }
 
