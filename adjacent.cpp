@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <array>
 #include <functional>
+#include <numeric>
 
 #include <catch2/catch.hpp>
 
@@ -46,6 +47,33 @@ TEST_CASE("091 partial_sum")
     {
         auto dest = std::vector<int>{};
         std::partial_sum(begin(v), end(v), std::back_inserter(dest));
+        CHECK(equal(result, dest));
+    }
+}
+
+
+TEST_CASE("093 inclusive_sum")
+{
+    auto v = std::vector{0, 3, 2, 9, 8};
+    constexpr auto result = std::array{0, 3, 5, 14, 22};
+
+    SECTION("stl")
+    {
+        auto dest = std::vector<int>{};
+        std::inclusive_scan(begin(v), end(v), std::back_inserter(dest));
+        CHECK(equal(result, dest));
+    }
+}
+
+TEST_CASE("094 exclusive_sum")
+{
+    auto v = std::vector{0, 3, 2, 9, 8};
+    constexpr auto result = std::array{0, 0, 3, 5, 14};
+
+    SECTION("stl")
+    {
+        auto dest = std::vector<int>{};
+        std::exclusive_scan(begin(v), end(v), std::back_inserter(dest), 0);
         CHECK(equal(result, dest));
     }
 }
