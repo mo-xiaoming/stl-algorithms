@@ -46,7 +46,7 @@ Inspired by Jonathan Boccara's talk ["105 STL Algorithms in Less Than an Hour"](
 
 * `set_symmetric_difference` A+B再减去AB的交集
 
-* `inner_product` 容器一的每个值和其对应的容器二的值‘相乘’，然后所有得出的结果再‘相加’
+* `inner_product` 容器一的每个值和其对应的容器二的值‘相乘’，然后再用初始值‘相加’以上结果
 
 ## 改变自身 (modify-self.cpp)
 
@@ -106,7 +106,7 @@ Inspired by Jonathan Boccara's talk ["105 STL Algorithms in Less Than an Hour"](
 
 * `merge` 排序后的两个容器合并生成排序后的第三个容器
 
-* `inplace_merge` 同一个容器内不同氛围合并
+* `inplace_merge` 同一个容器内不同有序范围合并
 
 * `make_heap` 做堆
 
@@ -116,13 +116,13 @@ Inspired by Jonathan Boccara's talk ["105 STL Algorithms in Less Than an Hour"](
 
 ## 两个容器的关系 (two-containers-relation.cpp)
 
-* `mismatch` 查找第一个不匹配的值
+* `mismatch` 查找两个容器中第一个不匹配值的位置
 
-* `includes` 容器是否包含第二个容器
+* `includes` 有序容器是否包含第二个有序容器
 
 * `equal` 容器是否相等
 
-* `lexicographical_equal` 按字典序是否相等
+* `lexicographical_compare` 按字典序是否相等
 
 * `is_permutation` 第二个容器是否是第一个容器值的排列组合之一
 
