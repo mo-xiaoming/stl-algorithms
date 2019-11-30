@@ -124,19 +124,19 @@ Inspired by Jonathan Boccara's talk ["105 STL Algorithms in Less Than an Hour"](
 
 * `lexicographical_compare` 按字典序是否相等
 
-* `is_permutation` 第二个容器是否是第一个容器值的排列组合之一
+* `is_permutation` 第二个容器是否是第一个容器值的排列组合之一。换言之，两个可能无序的容器是否相等
 
 ## 查找距离 (search-range.cpp)
 
 * `find_end` 查找模式在容器中出现的最后一次的起始位置
 
-* `search` 查找模式在容器中出现的第一次的起始位置
+* `search` 查找模式在容器中出现的第一次的起始位置。`find_end`/`search`，good naming:)
 
 * `search_n` 查找值M连续出现N次的位置，相当于`search`连续N个M
 
-* `lower_bound | upper_bound` 返回指定范围
+* `lower_bound | upper_bound` 返回"有序"容器中指定范围
 
-* `equal_range` 返回连续出现的某值的起始和结束位置
+* `equal_range` 返回"有序"容器中连续出现的某值的起始和结束位置。返回值为`std::pair(lower_bound(), upper_bound())`
 
 ## 相邻关系 (adjacent.cpp)
 
@@ -156,5 +156,5 @@ Inspired by Jonathan Boccara's talk ["105 STL Algorithms in Less Than an Hour"](
 
 * `swap_ranges` 交换两个范围内的所有值
 
-* `clamp` 将给予的值N限制在区间内
+* `clamp` 将给予的值输出限制在某区间内
 
