@@ -46,8 +46,6 @@ Inspired by Jonathan Boccara's talk ["105 STL Algorithms in Less Than an Hour"](
 
 * `set_symmetric_difference` A+B再减去AB的交集
 
-* `inner_product` 容器一的每个值和其对应的容器二的值‘相乘’，然后再用初始值‘相加’以上结果
-
 ## 改变自身 (modify-self.cpp)
 
 * `remove | remove_if` 删除满足条件的值
@@ -138,15 +136,31 @@ Inspired by Jonathan Boccara's talk ["105 STL Algorithms in Less Than an Hour"](
 
 * `equal_range` 返回"有序"容器中连续出现的某值的起始和结束位置。返回值为`std::pair(lower_bound(), upper_bound())`
 
+## 累加求总‘和’（reduce.cpp）
+
+* `accumulate` 相邻数据统统‘相加’，返回总结果
+
+* `reduce` 与`accumulate`相同，除了操作必须可交换、可结合
+
+* `inner_product` 容器一的每个值和其对应的容器二的值‘相乘’，然后再用初始值‘相加’以上结果
+
+* `transform_reduce` 与`inner_produce`相同，除了操作必须可交换、可结合，并且操作本身不能修改任何值
+
 ## 相邻关系 (adjacent.cpp)
 
 * `adjacent_find` 寻找第一段相邻‘相等’的数据段，返回数据段开头
 
-* `accumulate` 相邻数据统统‘相加’，返回总结果
-
 * `adjacent_difference` 从第‘二’个数据开始，和前面的项目‘相减’
 
 * `partial_sum` 每个值都和前面所有值（包含）‘累加’
+
+* `inclusive_scan` 与`partial_sum`相同，除了操作必须是可结合的
+
+* `exclusive_scan` 与`inclusive_scan`相同，除了本身的值不参与操作
+
+* `transform_inclusive_scan` 如名字所示
+
+* `transform_exclusive_scan` 如名字所示
 
 ## 其它
 
