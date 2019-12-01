@@ -38,13 +38,13 @@ Inspired by Jonathan Boccara's talk ["105 STL Algorithms in Less Than an Hour"](
 
 * `transform` 根据容器一二的值，运算生成对应的容器三的值
 
-* `set_difference` A-B
+* `set_difference` A-B，AB均有序
 
-* `set_union` A+B
+* `set_union` A+B，AB均有序
 
-* `set_intersection` 在A也在B
+* `set_intersection` 在A也在B，AB均有序
 
-* `set_symmetric_difference` A+B再减去AB的交集
+* `set_symmetric_difference` A+B再减去AB的交集，AB均有序
 
 ## 改变自身 (modify-self.cpp)
 
@@ -62,7 +62,7 @@ Inspired by Jonathan Boccara's talk ["105 STL Algorithms in Less Than an Hour"](
 
 * `shuffle` 乱序
 
-* `next_permutation | prev_permutation` 根据字典序生成下/上一个排列组合的值，知道到达字典序排列位置，此时返回false
+* `next_permutation | prev_permutation` 根据字典序生成下/上一个排列组合的值，直到到达字典序排列位置，此时返回false
 
 ## 自身值的属性 (properties-of-elements.cpp)
 
